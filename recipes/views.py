@@ -8,4 +8,4 @@ def about(request: HttpRequest) -> HttpResponse:
     return HttpResponse('about page')
 
 def contact(request: HttpRequest) -> HttpResponse:
-    return HttpResponse('contect page')
+    return HttpResponse('contact page')
