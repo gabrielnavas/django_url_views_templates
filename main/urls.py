@@ -21,15 +21,15 @@ from django.http import HttpResponse, HttpRequest
 def about(request: HttpRequest) -> HttpResponse:
     return HttpResponse('first hello world')
 
-def root(request: HttpRequest) -> HttpResponse:
-    return HttpResponse('root page')
+def home(request: HttpRequest) -> HttpResponse:
+    return HttpResponse('home page')
 
 def contact(request: HttpRequest) -> HttpResponse:
     return HttpResponse('contect page')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', root),
+    path('', home),
     path('about/', about),
     path('contact/', contact),
 ]
