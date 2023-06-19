@@ -24,8 +24,12 @@ def about(request: HttpRequest) -> HttpResponse:
 def root(request: HttpRequest) -> HttpResponse:
     return HttpResponse('root page')
 
+def contact(request: HttpRequest) -> HttpResponse:
+    return HttpResponse('contect page')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('about/', about),
     path('', root),
+    path('about/', about),
+    path('contact/', contact),
 ]
