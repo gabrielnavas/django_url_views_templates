@@ -5,4 +5,7 @@ def home(request: HttpRequest) -> HttpResponse:
     return HttpResponse('home page')
 
 def about(request: HttpRequest) -> HttpResponse:
-    return HttpResponse('contact')
+    return HttpResponse('about page')
+
+def contact(request: HttpRequest) -> HttpResponse:
+    return HttpResponse('contect page')
