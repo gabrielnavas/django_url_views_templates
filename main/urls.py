@@ -21,7 +21,11 @@ from django.http import HttpResponse, HttpRequest
 def about(request: HttpRequest) -> HttpResponse:
     return HttpResponse('first hello world')
 
+def root(request: HttpRequest) -> HttpResponse:
+    return HttpResponse('root page')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('about/', about)
+    path('about/', about),
+    path('', root),
 ]
