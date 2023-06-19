@@ -18,10 +18,8 @@ from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponse, HttpRequest
 
-from recipes.views import home
+from recipes.views import home, about
 
-def about(request: HttpRequest) -> HttpResponse:
-    return HttpResponse('first hello world')
 
 def contact(request: HttpRequest) -> HttpResponse:
     return HttpResponse('contect page')
