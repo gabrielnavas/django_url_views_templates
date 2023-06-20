@@ -8,7 +8,7 @@ def home(request: HttpRequest) -> HttpResponse:
     return render(request, 'recipes/home.html', context, status=200)
 
 def about(request: HttpRequest) -> HttpResponse:
-    return HttpResponse('about page')
+    return render(request, 'recipes/about.html')
 
 def contact(request: HttpRequest) -> HttpResponse:
     return render(request, 'recipes/contact.html')
