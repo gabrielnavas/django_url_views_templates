@@ -11,4 +11,4 @@ def about(request: HttpRequest) -> HttpResponse:
     return HttpResponse('about page')
 
 def contact(request: HttpRequest) -> HttpResponse:
-    return HttpResponse('contact page')
+    return render(request, 'recipes/contact.html')
