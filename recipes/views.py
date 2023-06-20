@@ -5,4 +5,4 @@ def home(request: HttpRequest) -> HttpResponse:
     context = {
         'name': 'Gabriel'
     }
-    return render(request, 'recipes/home.html', context, status=200)
+    return render(request, 'recipes/pages/home.html', context, status=200)
