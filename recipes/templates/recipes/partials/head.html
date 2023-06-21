@@ -53,6 +53,7 @@
       --font-primary: sans-serif;
       --font-headings: 'Roboto Slab', serif;
 
+      --spacing-gutter-small: 1.5rem;
       --spacing-gutter-medium: 3rem;
       --spacing-gutter-large: 4rem;
     }   
@@ -101,6 +102,46 @@
 
     .main-logo-text {
 
+    }
+
+    .search-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-form {
+      border: 0.2rem solid var(--color-primary-dark);
+      width: 64rem;
+      border-radius: .4rem;
+      position: relative;
+    }
+
+    .search-input, 
+    .search-button {
+      border: none;
+      background: none;
+      outline: none;
+      padding: var(--spacing-gutter-small);
+    }
+
+    .search-input {
+      padding-right: 3.7rem;
+      width: 100%;
+    }
+
+    .search-button {
+      position:absolute;
+      top: 0;
+      right: 0;
+      cursor: pointer;
+    }
+
+    .search-form:focus-within {
+      border-color: var(--color-primary);
+    }
+
+    .search-form:focus-within .search-button {
+      color: var(--color-primary);
     }
   </style>
 </head>
