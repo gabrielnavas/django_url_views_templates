@@ -6,3 +6,9 @@ def home(request: HttpRequest) -> HttpResponse:
         'name': 'Gabriel'
     }
     return render(request, 'recipes/pages/home.html', context, status=200)
+
+def recipe(request: HttpRequest, id) -> HttpResponse:
+    context = {
+        'name': 'Gabriel'
+    }
+    return render(request, 'recipes/pages/home.html', context, status=200)
