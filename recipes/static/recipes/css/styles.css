@@ -162,6 +162,7 @@ h1,h2,h3,h4,h5,h6 {
 
 .recipe-list-item {
   max-width: 64rem;
+  height: fit-content;
 }
 
 
@@ -211,7 +212,7 @@ h1,h2,h3,h4,h5,h6 {
   display: flex;
   flex-flow: row wrap;
   padding: var(--spacing-gutter-medium);
-  background: var(--color-gray-1);
+  background: var(--color-gray-2);
 }
 
 .recipe-meta {
