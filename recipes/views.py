@@ -14,7 +14,7 @@ def home(request: HttpRequest) -> HttpResponse:
 
 
 def category(request: HttpRequest, id) -> HttpResponse:
-    recipes = Recipe.objects.filter(category__id=id).order_by('-id')
+    recipes = Recipe.objects.filter(category__id=id, is_published=True).order_by('-id')
     context = {
         'recipes': recipes,
     }
