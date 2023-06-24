@@ -18,7 +18,7 @@ def category(request: HttpRequest, id) -> HttpResponse:
     context = {
         'recipes': recipes,
     }
-    return render(request, 'recipes/pages/home.html', context, status=200)
+    return render(request, 'recipes/pages/category.html', context, status=200)
 
 
 def recipe(request: HttpRequest, id) -> HttpResponse:
