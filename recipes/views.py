@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 
+from recipes.models import Recipe
+
 from utils.recipes.factory import make_recipe
 
 def home(request: HttpRequest) -> HttpResponse:
-    max_recipes_fake = 11
+    recipes = Recipe.objects.all().order_by('-id')
     context = {
-        'recipes': [make_recipe() for _ in range(max_recipes_fake)],
+        'recipes': recipes,
     }
     return render(request, 'recipes/pages/home.html', context, status=200)
 
