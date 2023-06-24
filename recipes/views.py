@@ -6,7 +6,7 @@ from recipes.models import Recipe
 from utils.recipes.factory import make_recipe
 
 def home(request: HttpRequest) -> HttpResponse:
-    recipes = Recipe.objects.all().order_by('-id')
+    recipes = Recipe.objects.filter(is_published=True).order_by('-id')
     context = {
         'recipes': recipes,
     }
