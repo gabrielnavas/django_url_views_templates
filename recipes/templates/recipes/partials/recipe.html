@@ -32,10 +32,12 @@
       {{ recipe.created_at|date:"d/m/Y" }} às {{ recipe.created_at|date:"H:i" }}
     </span>
     <span class="recipe-author-item">
-      <a href="{% url 'recipes:category' recipe.category.id %}">
-        <i class="fas fa-layer-group"></i>
-        <span>{{ recipe.category.name }}</span>
-      </a>
+      {% if recipe.category %}
+        <a href="{% url 'recipes:category' recipe.category.id %}">
+          <i class="fas fa-layer-group"></i>
+          <span>{{ recipe.category.name }}</span>
+        </a>
+      {% endif %}
     </span>
   </div>
 
