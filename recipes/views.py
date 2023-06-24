@@ -12,6 +12,15 @@ def home(request: HttpRequest) -> HttpResponse:
     }
     return render(request, 'recipes/pages/home.html', context, status=200)
 
+
+def category(request: HttpRequest, id) -> HttpResponse:
+    recipes = Recipe.objects.filter(category__id=id).order_by('-id')
+    context = {
+        'recipes': recipes,
+    }
+    return render(request, 'recipes/pages/home.html', context, status=200)
+
+
 def recipe(request: HttpRequest, id) -> HttpResponse:
     context = {
         'recipe': make_recipe(),
