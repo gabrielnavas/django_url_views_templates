@@ -17,6 +17,7 @@ def category(request: HttpRequest, id) -> HttpResponse:
     recipes = Recipe.objects.filter(category__id=id, is_published=True).order_by('-id')
     context = {
         'recipes': recipes,
+        'title': f'{recipes.first().category.name}',
     }
     return render(request, 'recipes/pages/category.html', context, status=200)
 
