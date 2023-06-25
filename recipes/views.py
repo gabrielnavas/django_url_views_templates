@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpRequest, HttpResponse, Http404
+from django.shortcuts import render, get_list_or_404
+from django.http import HttpRequest, HttpResponse
 
 from recipes.models import Recipe
 
@@ -14,14 +14,14 @@ def home(request: HttpRequest) -> HttpResponse:
 
 
 def category(request: HttpRequest, id) -> HttpResponse:
-    recipes = Recipe.objects.filter(category__id=id, is_published=True).order_by('-id')
-    
-    if len(recipes) == 0:
-        raise Http404('Not found')
-    
+    recipes = get_list_or_404(
+        Recipe.objects.
+            filter(category__id=id, is_published=True).
+            order_by('-id')
+    )
     context = {
         'recipes': recipes,
-        'title': f'{recipes.first().category.name} - Categoria | ',
+        'title': f'{recipes[0].category.name} - Categoria | ',
     }
     return render(request, 'recipes/pages/category.html', context, status=200)
 
