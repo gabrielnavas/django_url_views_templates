@@ -27,10 +27,9 @@ def category(request: HttpRequest, id) -> HttpResponse:
 
 
 def recipe(request: HttpRequest, id) -> HttpResponse:
-    recipe = Recipe.objects.filter(
-        id=id,
-        is_published=True
-    ).first()
+    recipe = get_object_or_404(
+        Recipe.objects.filter(id=id, is_published=True)
+    )
     context = {
         'recipe': recipe,
         'is_detail_page': True,
