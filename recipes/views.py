@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_list_or_404
+from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.http import HttpRequest, HttpResponse
 
 from recipes.models import Recipe
@@ -27,8 +27,12 @@ def category(request: HttpRequest, id) -> HttpResponse:
 
 
 def recipe(request: HttpRequest, id) -> HttpResponse:
+    recipe = Recipe.objects.filter(
+        id=id,
+        is_published=True
+    ).first()
     context = {
-        'recipe': make_recipe(),
+        'recipe': recipe,
         'is_detail_page': True,
     }
     return render(request, 'recipes/pages/recipe-view.html', context, status=200)
