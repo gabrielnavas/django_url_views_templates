@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 class RecipeTestBase(TestCase):
     def setUp(self) -> None:
-            category = Category.objects.create(name='any_fake_category')
+            category = self.make_recipe()
             author = User.objects.create_user(
                 username='any_username', 
                 email='any_email@email.com', 
@@ -29,3 +29,7 @@ class RecipeTestBase(TestCase):
                 author=author,
             )
             return super().setUp()
+
+    def make_recipe(self, name='any_fake_category') -> Category:
+        return Category.objects.create(name=name)
+    
