@@ -22,3 +22,7 @@ class RecipeViewsTest(TestCase):
         response = self.client.get(reverse('recipes:home'))
         STATUS_OK = 200
         self.assertEqual(response.status_code, STATUS_OK)
+
+    def test_recipe_home_view_loads_correct_template(self):
+        response = self.client.get(reverse('recipes:home'))
+        self.assertTemplateUsed(response, 'recipes/pages/home.html')
