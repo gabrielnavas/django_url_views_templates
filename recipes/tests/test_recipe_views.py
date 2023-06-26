@@ -26,7 +26,7 @@ class RecipeViewsTest(TestCase):
             response.content.decode('utf-8')
         )
 
-    def test_recipe_home_template_loads_recipes(self):
+    def test_recipe_home_template_loads_correct_context_recipes(self):
         category = Category.objects.create(name='any_fake_category')
         author = User.objects.create_user(
             username='any_username', 
