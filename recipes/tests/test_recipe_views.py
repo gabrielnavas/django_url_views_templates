@@ -39,3 +39,9 @@ class RecipeViewsTest(TestCase):
         response = self.client.get(reverse('recipes:category', kwargs={'id': category_fake_id}))
         HTTP_CODE_NOT_FOUND = 404
         self.assertEqual(response.status_code, HTTP_CODE_NOT_FOUND) 
+
+    def test_recipe_view_return_404_if_no_recipes_found(self):
+        recipe_fake_id = 1000
+        response = self.client.get(reverse('recipes:recipe', kwargs={'id': recipe_fake_id}))
+        HTTP_CODE_NOT_FOUND = 404
+        self.assertEqual(response.status_code, HTTP_CODE_NOT_FOUND) 
