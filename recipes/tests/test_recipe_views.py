@@ -33,3 +33,9 @@ class RecipeViewsTest(TestCase):
             '<h1>No recipes found here.</h1>', 
             response.content.decode('utf-8')
         )
+
+    def test_recipe_category_view_return_404_if_no_recipes_found(self):
+        category_fake_id = 1000
+        response = self.client.get(reverse('recipes:category', kwargs={'id': category_fake_id}))
+        HTTP_CODE_NOT_FOUND = 404
+        self.assertEqual(response.status_code, HTTP_CODE_NOT_FOUND) 
