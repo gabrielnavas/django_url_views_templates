@@ -50,20 +50,55 @@ class RecipeViewsTest(TestCase):
             author=author,
         )
         response = self.client.get(reverse('recipes:home'))
-        response_recipes = response.context['recipes'].first()
+
+        response_recipes = response.context['recipes']
+        response_recipe = response.context['recipes'].first()
+        recipes_found_length = 1        
+        self.assertEqual(len(response_recipes), recipes_found_length)
+        self.assertEqual(response_recipe.title, 'any_title')
+        self.assertEqual(response_recipe.description, 'any_description')
+        self.assertEqual(response_recipe.slug, 'any-slug')
+        self.assertEqual(response_recipe.preparation_time, 10)
+        self.assertEqual(response_recipe.preparation_time_unit, 'Minutes')
+        self.assertEqual(response_recipe.servings, 5)
+        self.assertEqual(response_recipe.servings_unit, 'Unit')
+        self.assertEqual(response_recipe.preparation_steps, 'any_steps')
+        self.assertEqual(response_recipe.preparation_steps_is_html, False)
+        self.assertEqual(response_recipe.is_published, True)
+        self.assertEqual(response_recipe.category.name, category.name)
+        self.assertEqual(response_recipe.author.username, author.username)
+
+    def test_recipe_home_template_loads_correct_content_recipes(self):
+        category = Category.objects.create(name='any_fake_category')
+        author = User.objects.create_user(
+            username='any_username', 
+            email='any_email@email.com', 
+            password='any_password',
+            first_name='any_name',
+            last_name='any_last_name'
+        )
+        Recipe.objects.create(
+            title = 'any_title',
+            description = 'any_description',
+            slug = 'any-slug',
+            preparation_time = 10,
+            preparation_time_unit = 'Minutes',
+            servings = 5,
+            servings_unit = 'Unit',
+            preparation_steps = 'any_steps',
+            preparation_steps_is_html = False,
+            is_published = True,
+            category=category,
+            author=author,
+        )
+        response = self.client.get(reverse('recipes:home'))
+
+        content = response.content.decode('utf-8')
+        self.assertIn('any_title', content)
+        self.assertIn('any_description', content)
+        self.assertIn('10 Minutes', content)
+        self.assertIn('5 Unit', content)
         
-        self.assertEqual(response_recipes.title, 'any_title')
-        self.assertEqual(response_recipes.description, 'any_description')
-        self.assertEqual(response_recipes.slug, 'any-slug')
-        self.assertEqual(response_recipes.preparation_time, 10)
-        self.assertEqual(response_recipes.preparation_time_unit, 'Minutes')
-        self.assertEqual(response_recipes.servings, 5)
-        self.assertEqual(response_recipes.servings_unit, 'Unit')
-        self.assertEqual(response_recipes.preparation_steps, 'any_steps')
-        self.assertEqual(response_recipes.preparation_steps_is_html, False)
-        self.assertEqual(response_recipes.is_published, True)
-        self.assertEqual(response_recipes.category.name, category.name)
-        self.assertEqual(response_recipes.author.username, author.username)
 
     def test_recipe_category_view_function_is_correct(self):
         category_id = 1
