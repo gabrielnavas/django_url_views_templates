@@ -90,6 +90,13 @@ class RecipeViewsTest(RecipeTestBase):
         self.assertIn(title_expected, content)
         self.assertEqual(len(response_context_recipes), 1)
 
+    def test_recipe_category_template_dont_load_recipes_not_published(self):
+        """Test recipe is_published False dont show"""
+        recipe = self.make_recipe(is_published=False)
+        response = self.client.get(reverse('recipes:category', kwargs={'id': recipe.category.id}))
+        HTTP_CODE_NOT_FOUND = 404
+        self.assertEqual(response.status_code, HTTP_CODE_NOT_FOUND)
+
     def test_recipe_detail_view_function_is_correct(self):
         recipe_id = 1
         view = resolve(reverse('recipes:recipe', kwargs={'id': recipe_id}))
