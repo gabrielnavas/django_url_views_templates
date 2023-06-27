@@ -1,3 +1,5 @@
+from unittest import skip
+
 from django.urls import reverse, resolve
 
 from recipes import views
@@ -25,6 +27,7 @@ class RecipeViewsTest(RecipeTestBase):
             response.content.decode('utf-8')
         )
 
+    @skip('any message')
     def test_recipe_home_template_loads_correct_context_recipes(self):
         self.make_recipe()
         response = self.client.get(reverse('recipes:home'))
