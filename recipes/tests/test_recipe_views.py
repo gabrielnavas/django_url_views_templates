@@ -89,3 +89,13 @@ class RecipeViewsTest(RecipeTestBase):
         response = self.client.get(reverse('recipes:recipe', kwargs={'id': recipe_fake_id}))
         HTTP_CODE_NOT_FOUND = 404
         self.assertEqual(response.status_code, HTTP_CODE_NOT_FOUND) 
+
+    def test_recipe_detail_template_loads_the_correct_recipe(self):
+        title_expected = 'This is a detail page - It load one recipe'
+        recipe = self.make_recipe(title=title_expected)
+
+        response = self.client.get(reverse('recipes:recipe', kwargs={ 'id': recipe.id }))
+        content = response.content.decode('utf-8')
+
+        self.assertIn(title_expected, content)
+
