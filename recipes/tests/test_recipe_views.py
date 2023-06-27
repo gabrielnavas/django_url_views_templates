@@ -90,7 +90,7 @@ class RecipeViewsTest(RecipeTestBase):
         self.assertIn(title_expected, content)
         self.assertEqual(len(response_context_recipes), 1)
 
-    def test_recipe_category_template_dont_load_recipes_not_published(self):
+    def test_recipe_category_template_dont_load_recipe_not_published(self):
         """Test recipe is_published False dont show"""
         recipe = self.make_recipe(is_published=False)
         response = self.client.get(reverse('recipes:category', kwargs={'id': recipe.category.id}))
@@ -117,7 +117,7 @@ class RecipeViewsTest(RecipeTestBase):
 
         self.assertIn(title_expected, content)
 
-    def test_recipe_detail_template_dont_load_recipes_not_published(self):
+    def test_recipe_detail_template_dont_load_recipe_not_published(self):
         """Test recipe is_published False dont show"""
         recipe = self.make_recipe(is_published=False)
         response = self.client.get(reverse('recipes:recipe', kwargs={'id': recipe.id}))
