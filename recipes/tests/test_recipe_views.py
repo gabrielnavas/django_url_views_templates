@@ -68,6 +68,17 @@ class RecipeViewsTest(RecipeTestBase):
         HTTP_CODE_NOT_FOUND = 404
         self.assertEqual(response.status_code, HTTP_CODE_NOT_FOUND) 
 
+    def test_recipe_category_template_loads_recipes(self):
+        title_expected = 'This is a category test'
+        recipe = self.make_recipe(title=title_expected)
+
+        response = self.client.get(reverse('recipes:category', args=(recipe.category.id, )))
+        content = response.content.decode('utf-8')
+        response_context_recipes = response.context['recipes']
+
+        self.assertIn(title_expected, content)
+        self.assertEqual(len(response_context_recipes), 1)
+
     def test_recipe_detail_view_function_is_correct(self):
         recipe_id = 1
         view = resolve(reverse('recipes:recipe', kwargs={'id': recipe_id}))
