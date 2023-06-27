@@ -1,8 +1,6 @@
-from django.test import TestCase
 from django.urls import reverse, resolve
 
 from recipes import views
-from recipes.models import Recipe
 
 from recipes.tests.test_recipe_base import RecipeTestBase
 
