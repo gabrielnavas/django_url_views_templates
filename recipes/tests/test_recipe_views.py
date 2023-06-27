@@ -46,6 +46,17 @@ class RecipeViewsTest(RecipeTestBase):
         self.assertEqual(response_recipe.preparation_steps_is_html, False)
         self.assertEqual(response_recipe.is_published, True)
 
+    def test_recipe_home_template_dont_load_recipes_not_published(self):
+        """Test recipe is_published False dont show"""
+        self.make_recipe(is_published=False)
+
+        response = self.client.get(reverse('recipes:home'))
+
+        self.assertIn(
+            '<h1>No recipes found here.</h1>', 
+            response.content.decode('utf-8')
+        )
+
     def test_recipe_home_template_loads_correct_content_recipes(self):
         self.make_recipe()
         response = self.client.get(reverse('recipes:home'))
