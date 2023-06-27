@@ -7,9 +7,6 @@ from recipes.models import Recipe
 from recipes.tests.test_recipe_base import RecipeTestBase
 
 class RecipeViewsTest(RecipeTestBase):
-    def tearDown(self) -> None:
-        return super().tearDown()
-
     def test_recipe_home_view_function_is_correct(self):
         view = resolve(reverse('recipes:home'))
         self.assertIs(view.func, views.home)
@@ -24,8 +21,6 @@ class RecipeViewsTest(RecipeTestBase):
         self.assertTemplateUsed(response, 'recipes/pages/home.html')
 
     def test_recipe_home_template_shows_norecipes_found_if_norecipes(self):
-        recipe_id_fake_created = 1
-        Recipe.objects.get(id=recipe_id_fake_created).delete()
         response = self.client.get(reverse('recipes:home'))
         self.assertIn(
             '<h1>No recipes found here.</h1>', 
@@ -33,7 +28,7 @@ class RecipeViewsTest(RecipeTestBase):
         )
 
     def test_recipe_home_template_loads_correct_context_recipes(self):
-        
+        self.make_recipe()
         response = self.client.get(reverse('recipes:home'))
 
         response_recipes = response.context['recipes']
@@ -52,6 +47,7 @@ class RecipeViewsTest(RecipeTestBase):
         self.assertEqual(response_recipe.is_published, True)
 
     def test_recipe_home_template_loads_correct_content_recipes(self):
+        self.make_recipe()
         response = self.client.get(reverse('recipes:home'))
 
         content = response.content.decode('utf-8')
