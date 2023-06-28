@@ -13,3 +13,19 @@ class RecipeModelsTest(RecipeTestBase):
 
         with self.assertRaises(ValidationError):
             self.recipe.full_clean() # call validation 
+
+    def test_recipe_fields_max_length(self):
+        fields = [
+            ('title', 65),
+            ('description', 165),
+            ('preparation_time_unit', 65),
+            ('servings_unit', 65),
+            ('preparation_steps', 500),
+        ]
+
+
+        for field, max_length in fields:
+            value = 'A' * (max_length + 0)
+            setattr(self.recipe, field, value)
+            with self.assertRaises(ValidationError):
+                self.recipe.full_clean() # call validation 
